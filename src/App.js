@@ -10,25 +10,31 @@ class Calculator extends Component {
         number2: null,
         number3:null
       },
+      checked:{
+        number1: false,
+        number2: false,
+        number3: false
+      },
       result:null,
       error:null
     }
   }
   handlePlus(numbers){
+    const {checked}=this.state
     const number1=parseInt(numbers.number1)
     const number2=parseInt(numbers.number2)
     const number3=parseInt(numbers.number3)
     var cek=0
     var result=0
-    if(!number1)cek++
-    if(!number2)cek++
-    if(!number3)cek++
-    if(cek>1){
-      this.setState({result:null,error:'Error! Please input at least two numbers!'})
-    }else if(cek===1){
-      if(!number1)result=number2+number3
-      if(!number2)result=number1+number3
-      if(!number3)result=number1+number2
+    if(checked.number1)cek++
+    if(checked.number2)cek++
+    if(checked.number3)cek++
+    if(cek<2){
+      this.setState({result:null,error:'Error! Please check at least two fields!'})
+    }else if(cek===2){
+      if(!checked.number1)result=number2+number3
+      if(!checked.number2)result=number1+number3
+      if(!checked.number3)result=number1+number2
       this.setState({result:result,error:''})
     }else{
       result=number1+number2+number3
@@ -36,20 +42,21 @@ class Calculator extends Component {
     }
   }
   handleMinus(numbers){
+    const {checked}=this.state
     const number1=parseInt(numbers.number1)
     const number2=parseInt(numbers.number2)
     const number3=parseInt(numbers.number3)
     var cek=0
     var result=0
-    if(!number1)cek++
-    if(!number2)cek++
-    if(!number3)cek++
-    if(cek>1){
-      this.setState({result:null,error:'Error! Please input at least two numbers!'})
-    }else if(cek===1){
-      if(!number1)result=number2-number3
-      if(!number2)result=number1-number3
-      if(!number3)result=number1-number2
+    if(checked.number1)cek++
+    if(checked.number2)cek++
+    if(checked.number3)cek++
+    if(cek<2){
+      this.setState({result:null,error:'Error! Please check at least two fields!'})
+    }else if(cek===2){
+      if(!checked.number1)result=number2-number3
+      if(!checked.number2)result=number1-number3
+      if(!checked.number3)result=number1-number2
       this.setState({result:result,error:''})
     }else{
       result=number1-number2-number3
@@ -57,20 +64,21 @@ class Calculator extends Component {
     }
   }
   handleTimes(numbers){
+    const {checked}=this.state
     const number1=parseInt(numbers.number1)
     const number2=parseInt(numbers.number2)
     const number3=parseInt(numbers.number3)
     var cek=0
     var result=0
-    if(!number1)cek++
-    if(!number2)cek++
-    if(!number3)cek++
-    if(cek>1){
-      this.setState({result:null,error:'Error! Please input at least two numbers!'})
-    }else if(cek===1){
-      if(!number1)result=number2*number3
-      if(!number2)result=number1*number3
-      if(!number3)result=number1*number2
+    if(checked.number1)cek++
+    if(checked.number2)cek++
+    if(checked.number3)cek++
+    if(cek<2){
+      this.setState({result:null,error:'Error! Please check at least two fields!'})
+    }else if(cek===2){
+      if(!checked.number1)result=number2*number3
+      if(!checked.number2)result=number1*number3
+      if(!checked.number3)result=number1*number2
       this.setState({result:result,error:''})
     }else{
       result=number1*number2*number3
@@ -78,20 +86,21 @@ class Calculator extends Component {
     }
   }
   handleDivide(numbers){
+    const {checked}=this.state
     const number1=parseInt(numbers.number1)
     const number2=parseInt(numbers.number2)
     const number3=parseInt(numbers.number3)
     var cek=0
     var result=0
-    if(!number1)cek++
-    if(!number2)cek++
-    if(!number3)cek++
-    if(cek>1){
-      this.setState({result:null,error:'Error! Please input at least two numbers!'})
-    }else if(cek===1){
-      if(!number1)result=number2/number3
-      if(!number2)result=number1/number3
-      if(!number3)result=number1/number2
+    if(checked.number1)cek++
+    if(checked.number2)cek++
+    if(checked.number3)cek++
+    if(cek<2){
+      this.setState({result:null,error:'Error! Please check at least two fields!'})
+    }else if(cek===2){
+      if(!checked.number1)result=number2/number3
+      if(!checked.number2)result=number1/number3
+      if(!checked.number3)result=number1/number2
       this.setState({result:result,error:''})
     }else{
       result=number1/number2/number3
@@ -99,34 +108,59 @@ class Calculator extends Component {
     }
   }
   render(){
-    let {numbers}=this.state;
+    let {numbers}=this.state
+    let {checked}=this.state
   return (
     <div className="App">
       <div>
       <input className="input" 
       onChange={(e)=>{
           numbers.number1=e.target.value
-          this.setState({numbers})
+          this.setState({numbers:numbers})
       }}></input>
-      <p className="cek">{isNaN(numbers.number1)?<i style={{padding:3}}className="fas fa-times"></i>:numbers.number1?<i className="fas fa-check"></i>:<i style={{color:'white'}} className="fas fa-check"></i>}</p>
-      <p className="warning">{isNaN(numbers.number1)?'Please input a number!':''}</p>
+        <input type="checkbox" className="cek" onChange={(e)=>{
+          if(e.target.checked){
+            checked.number1=e.target.checked
+            this.setState({checked:checked})
+          }else{
+            checked.number1=e.target.checked
+            this.setState({checked:checked})
+          }
+        }}/>
+        <p className="warning">{isNaN(numbers.number1)?'Please input a number!':''}</p>
       </div>
       <div>
       <input className="input"
        onChange={(e)=>{
         numbers.number2=e.target.value
-        this.setState({numbers})
+          this.setState({numbers:numbers})
         }}></input>
-      <p className="cek">{isNaN(numbers.number2)?<i style={{padding:3}}className="fas fa-times"></i>:numbers.number2?<i className="fas fa-check"></i>:<i style={{color:'white'}} className="fas fa-check"></i>}</p>
+       <input type="checkbox" className="cek" onChange={(e)=>{
+         if(e.target.checked){
+          checked.number2=e.target.checked
+            this.setState({checked:checked})
+         }else{
+          checked.number2=e.target.checked
+          this.setState({checked:checked})
+         }
+       }}/>
       <p className="warning">{isNaN(numbers.number2)?'Please input a number!':''}</p>
       </div>
       <div>
       <input className="input"
        onChange={(e)=>{
         numbers.number3=e.target.value
-        this.setState({numbers})
+          this.setState({numbers:numbers})
        }}></input>
-      <p className="cek">{isNaN(numbers.number3)?<i style={{padding:3}}className="fas fa-times"></i>:numbers.number3?<i className="fas fa-check"></i>:<i style={{color:'white'}} className="fas fa-check"></i>}</p>
+       <input type="checkbox" className="cek" onChange={(e)=>{
+        if(e.target.checked){
+          checked.number3=e.target.checked
+          this.setState({checked:checked})
+        }else{
+          checked.number3=e.target.checked
+          this.setState({checked:checked})
+        }
+       }}/>
       <p className="warning">{isNaN(numbers.number3)?'Please input a number!':''}</p>
       </div>
       <div className="FieldInput">
@@ -136,7 +170,7 @@ class Calculator extends Component {
         <button className="button" onClick={()=>this.handleDivide(numbers)}>/</button>
       </div>
       <hr className="line"></hr>
-      <p className="result">Hasil : {this.state.result} </p>
+      <p className="result">Result : {isNaN(this.state.result)?<a style={{color:'red'}}>Wrong input!</a>:this.state.result} </p>
       <p className="error">{this.state.error} </p>
     </div>
   );

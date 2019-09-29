@@ -26,10 +26,11 @@
 ## App Screenshot
 <p >
   <span>
-      <image  src='./assets/ss5.png' />
-      <image  src='./assets/ss2.png' />
-      <image src='./assets/ss3.png' /> 
-      <image src='./assets/ss4.png' /> 
-      <image src='./assets/ss1.png' />
+      <image  src='./assets/ass1.png' />
+      <image  src='./assets/ass2.png' />
+      <image src='./assets/ass3.png' /> 
+      <image src='./assets/ass6.png' />
+      <image src='./assets/ass5.png' />
+       <image src='./assets/ass4.png' /> 
   </span>
 </p>
